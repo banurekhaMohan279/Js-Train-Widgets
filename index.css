@@ -209,6 +209,8 @@ button-popup{
 
 .bottom{
   background: pink;
+  animation: 0.5s slide-from-top;
+  animation-fill-mode: forwards;
 }
 
 .hide{
