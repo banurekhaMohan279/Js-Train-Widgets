@@ -190,3 +190,27 @@ button-popup{
   height: 100%;
   background-color: green;
 }
+
+/** Accordion**/
+.accordion{
+  width: 70%;
+  margin:auto;
+}
+
+.top,.bottom{
+  padding: 5%;
+  margin:0px;
+}
+
+.top{
+    cursor: pointer;
+    background: lightgrey;
+}
+
+.bottom{
+  background: pink;
+}
+
+.hide{
+  display: none;
+}
