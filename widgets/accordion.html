@@ -20,7 +20,17 @@
       </div>
       <div class = "col-2">
         <a href = ".html" class = "next-btn"> &rarr; </a>
-        <code class = "code-snippet-html"></code>
+        <xmp class = "code-snippet-html">
+          <div class = "accordion">
+            <p class = "top" onclick = "toggle()"> Top content &darr;</p>
+            <p class = "bottom hide"> Bottom content </p>
+          </div>
+        </xmp>
+        <code class = "code-snippet-js">
+          function toggle(){
+          event.target.nextElementSibling.classList.toggle('hide');
+        }
+      </code>
       </div>
     </div>
     <script>
