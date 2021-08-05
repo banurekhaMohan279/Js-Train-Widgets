@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Like button</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .liked {
+        color: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <script type="text/babel">
+      function Likedbtn() {
+        const [count, setCount] = React.useState(100);
+        const [liked, setLiked] = React.useState(false);
+
+        React.useEffect(() => {
+          liked ? setCount(prev => prev + 1) : setCount(prev => prev - 1);
+        }, [liked]);
+
+        const updateLike = () => {
+          setLiked(prev => !liked);
+        };
+
+        return (
+          <>
+            <h1> Liked button without Reducer </h1>
+            <button
+              onClick={() => updateLike()}
+              className={liked ? "liked" : "unlike"}
+            >
+              LIKE | {count}
+            </button>
+          </>
+        );
+      }
+      ReactDOM.render(<Likedbtn />, document.querySelector("#root"));
+
+      function likedBtn1() {
+        const initialState = { count: 100, liked: false };
+        const updateLike = () => {};
+
+        return (
+          <>
+            <h1> Liked button without Reducer </h1>
+            <button
+              onClick={() => updateLike()}
+              className={liked ? "liked" : "unlike"}
+            >
+              LIKE | {count}
+            </button>
+          </>
+        );
+      }
+      ReactDOM.render(<Likedbtn1 />, document.querySelector("#root1"));
+    </script>
+  </body>
+</html>
