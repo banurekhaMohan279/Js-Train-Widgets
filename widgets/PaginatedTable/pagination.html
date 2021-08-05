@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Paginated Table</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function PaginatedTable() {
+        const [page, setPage] = React.useState(1);
+        const [users, setUsers] = React.useState([]);
+
+        React.useEffect(() => {
+          fetchUsers();
+        }, [page]);
+
+        const fetchUsers = () => {
+          fetch(`https://randomuser.me/api?results=10&page=${page}`)
+            .then(res => res.json())
+            .then(json => setUsers(json.results));
+        };
+
+        const setPageNumber = e => {
+          if (e.target.dataset.id >= 1) {
+            setPage(e.target.dataset.id);
+          }
+        };
+
+        const renderTBody = () => {
+          return users.map(user => {
+            return (
+              <tr key={user.login.uuid}>
+                <td>{user.dob.age}</td>
+                <td>{user.name.last + " " + user.name.first}</td>
+                <td>{user.gender}</td>
+              </tr>
+            );
+          });
+        };
+        return (
+          <>
+            <h1> Paginated Table </h1>
+            <table>
+              <thead>
+                <tr>
+                  <th> ID </th>
+                  <th> Name </th>
+                  <th> Gender </th>
+                </tr>
+              </thead>
+              <tbody>{users && renderTBody()}</tbody>
+            </table>
+            <section onClick={e => setPageNumber(e)}>
+              <button data-id="1">First</button>
+              <button data-id={parseInt(page) - 1}>Previous</button>
+              <button data-id={parseInt(page) + 1}>Next</button>
+              <button data-id="10">Last</button>
+            </section>
+          </>
+        );
+      }
+      ReactDOM.render(<PaginatedTable />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>

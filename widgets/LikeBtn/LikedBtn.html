@@ -52,7 +52,9 @@
 
       function likedBtn1() {
         const initialState = { count: 100, liked: false };
-        const updateLike = () => {};
+        const [state, dispatch] = React.useReducer(reducer, initialState);
+        const action = initialState.liked ? "" : "";
+        const updateLike = () => dispatch();
 
         return (
           <>
